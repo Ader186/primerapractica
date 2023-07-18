@@ -1,18 +1,32 @@
-let contadorMayores = 0;
+const readline = require('readline');
+
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
+
 let contadorMenores = 0;
-let personasIngresadas = 0;
+let contadorMayores = 0;
+let contadorPersonas = 0;
 
-while (personasIngresadas < 20) {
-  const edad = parseInt(prompt("Ingrese la edad de la persona:"));
+rl.on('line', (input) => {
+  const edad = parseInt(input);
+  contadorPersonas++;
 
-  if (edad >= 18) {
+  if (edad > 17) {
     contadorMayores++;
   } else {
     contadorMenores++;
   }
 
-  personasIngresadas++;
-}
+  if (contadorPersonas === 20) {
+    console.log("Cantidad de personas menores de edad: " + contadorMenores);
+    console.log("Cantidad de personas mayores de edad: " + contadorMayores);
+    rl.close();
+  } else {
+    console.log("Ingrese la edad de la siguiente persona:");
+  }
+});
 
-console.log("Total de personas mayores de edad:", contadorMayores);
-console.log("Total de personas menores de edad:", contadorMenores);
+console.log("Ingrese la edad de la primera persona:");
+
